@@ -67,7 +67,7 @@
 }
 
 .progress-bar__inner {
-  width: 150px;
+  width: 0;
   height: 11px;
   display: flex;
   justify-content: flex-end;
