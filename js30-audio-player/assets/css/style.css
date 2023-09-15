@@ -3,8 +3,10 @@
 }
 
 :root {
-  --primary-color: #eb6b34;
-  --secondary-color: #152b2c;
+  /*--primary-color: #eb6b34;*/
+  /*--secondary-color: #152b2c;*/
+  --primary-color: #FFFFFF;
+  --secondary-color: #000000;
 }
 
 .wrapper {
