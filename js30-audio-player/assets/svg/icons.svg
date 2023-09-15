@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+
+  <symbol id="next" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
+    <path d="M6.01528 4.98666L16 13.0057L5.98476 20.9866L6.01528 4.98666Z" fill="#F4EFEF" stroke="#F4EFEF"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M20.0133 6.01337L19.9866 20.0133" stroke="#F4EFEF" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round"/>
+  </symbol>
+
+  <symbol id="prev" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path d="M19 20L9 12L19 4L19 20Z" fill="#F4EFEF" stroke="#F4EFEF" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round"/>
+    <path d="M5 19L5 5" stroke="#F4EFEF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+
+  <symbol id="pause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    <path d="M395,512a73.14,73.14,0,0,1-73.14-73.14V73.14a73.14,73.14,0,1,1,146.29,0V438.86A73.14,73.14,0,0,1,395,512Z"
+    />
+    <path d="M117,512a73.14,73.14,0,0,1-73.14-73.14V73.14a73.14,73.14,0,1,1,146.29,0V438.86A73.14,73.14,0,0,1,117,512Z"
+    />
+  </symbol>
+
+  <symbol id="play" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+    <path
+      d="M60.54,512c-17.06,0-30.43-13.86-30.43-31.56V31.55C30.12,13.86,43.48,0,60.55,0A32.94,32.94,0,0,1,77,4.52L465.7,229c10.13,5.85,16.18,16,16.18,27s-6,21.2-16.18,27L77,507.48A32.92,32.92,0,0,1,60.55,512Z"
+    />
+  </symbol>
+
+</svg>

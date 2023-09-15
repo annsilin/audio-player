@@ -6,8 +6,50 @@
   <link href="assets/css/normalize.css" rel="stylesheet">
   <link href="assets/css/style.css" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 </head>
 <body>
+<div class="wrapper">
+  <img class="album-cover" src="assets/img/shampoo-cover.jpg" alt="">
 
+  <div class="song-name">
+    <span class="artist">MAMAMOO</span>
+    <div class="title">Shampoo</div>
+  </div>
+
+  <div class="progress-wrapper">
+    <div class="progress-bar">
+      <div class="progress-bar__inner">
+        <div class="progress-bar__inner-dot"></div>
+      </div>
+    </div>
+    <div class="progress-bar-time-container">
+      <span class="progress-bar-time progress-bar-time__current">1:25</span>
+      <span class="progress-bar-time progress-bar-time__end">3:15</span>
+    </div>
+  </div>
+  <div class="buttons">
+    <button class="prev-btn btn">
+      <svg width="26px" height="26px">
+        <use href="assets/svg/icons.svg#prev"></use>
+      </svg>
+    </button>
+
+    <button class="play-pause-btn">
+      <svg width="26px" height="26px">
+        <use href="assets/svg/icons.svg#pause"></use>
+      </svg>
+    </button>
+
+    <button class="next-btn btn">
+      <svg width="26px" height="26px">
+        <use href="assets/svg/icons.svg#next"></use>
+      </svg>
+    </button>
+  </div>
+
+</div>
 </body>
 </html>
