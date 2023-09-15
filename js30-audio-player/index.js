@@ -24,6 +24,9 @@ const initSong = (i) => {
   document.documentElement.style.setProperty('--primary-color', songs[i].color1);
   document.documentElement.style.setProperty('--secondary-color', songs[i].color2);
   progressBarCurrent.style.width = '0';
+  audioFile.addEventListener('loadedmetadata', () => {
+    progressBarDuration.textContent = convertTime(audioFile.duration);
+  });
 }
 
 initSong(currentSong);
