@@ -4,8 +4,11 @@ const artist = document.querySelector('.artist');
 const audioFile = document.querySelector('.audio');
 const playPauseBtn = document.querySelector('.play-pause-btn');
 const playPauseIcon = playPauseBtn.querySelector('svg').querySelector('use');
+const nextBtn = document.querySelector('.next-btn');
+const prevBtn = document.querySelector('.prev-btn');
 
 let isPlay = false;
+let currentSong = 0;
 
 const initSong = (i) => {
   coverImg.src = songs[i].cover;
@@ -17,6 +20,8 @@ const initSong = (i) => {
   document.documentElement.style.setProperty('--primary-color', songs[i].color1);
   document.documentElement.style.setProperty('--secondary-color', songs[i].color2);
 }
+
+initSong(currentSong);
 
 const playPause = () => {
   if (!isPlay) {
@@ -31,3 +36,25 @@ const playPause = () => {
 }
 
 playPauseBtn.addEventListener("click", playPause);
+
+const nextTrack = () => {
+  if (currentSong >= songs.length - 1) {
+    currentSong = 0;
+  } else {
+    currentSong += 1;
+  }
+  initSong(currentSong);
+}
+
+const prevTrack = () => {
+  if (currentSong <= 0) {
+    currentSong = songs.length - 1;
+  } else {
+    currentSong -= 1;
+  }
+  initSong(currentSong);
+}
+
+nextBtn.addEventListener("click", nextTrack);
+prevBtn.addEventListener("click", prevTrack);
+
