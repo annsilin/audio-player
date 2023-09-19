@@ -9,10 +9,8 @@ const prevBtn = document.querySelector('.prev-btn');
 const progressBar = document.querySelector('.progress-bar');
 const progressBarCurrent = document.querySelector('.progress-bar__inner');
 const progressBarTime = document.querySelector('.progress-bar-time__current');
-const progressBarDuration = document.querySelector('.progress-bar-time__end')
-
-let isPlay = false;
-let currentSong = 0;
+const progressBarDuration = document.querySelector('.progress-bar-time__end');
+const progressBarHandle = document.querySelector('.progress-bar__inner-dot');
 
 const initSong = (i) => {
   coverImg.src = songs[i].cover;
@@ -29,28 +27,30 @@ const initSong = (i) => {
   });
 }
 
-initSong(currentSong);
-
+/* Play song */
 const play = () => {
   audioFile.play();
   playPauseIcon.setAttribute("href", "assets/svg/icons.svg#pause");
-  isPlay = true;
+  isPlaying = true;
 }
 
+/* Pause song */
+const pause = () => {
+  audioFile.pause();
+  playPauseIcon.setAttribute("href", "assets/svg/icons.svg#play");
+  isPlaying = false;
+}
+
+/* Play or pause song */
 const playPause = () => {
-  if (!isPlay) {
-    audioFile.play();
-    playPauseIcon.setAttribute("href", "assets/svg/icons.svg#pause");
-    isPlay = true;
+  if (!isPlaying) {
+    play();
   } else {
-    audioFile.pause();
-    playPauseIcon.setAttribute("href", "assets/svg/icons.svg#play");
-    isPlay = false;
+    pause();
   }
 }
 
-playPauseBtn.addEventListener("click", playPause);
-
+/* Switch to next track */
 const nextTrack = () => {
   if (currentSong >= songs.length - 1) {
     currentSong = 0;
@@ -61,6 +61,7 @@ const nextTrack = () => {
   play();
 }
 
+/* Switch to previous track */
 const prevTrack = () => {
   if (currentSong <= 0) {
     currentSong = songs.length - 1;
@@ -71,9 +72,7 @@ const prevTrack = () => {
   play();
 }
 
-nextBtn.addEventListener("click", nextTrack);
-prevBtn.addEventListener("click", prevTrack);
-
+/* Convert time from seconds to m:ss format */
 const convertTime = (seconds) => {
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = Math.floor(seconds % 60);
@@ -85,6 +84,7 @@ const convertTime = (seconds) => {
   }
 }
 
+/* Update progress bar with current track time */
 const progressBarUpdate = (e) => {
   const {duration, currentTime} = e.target;
   const progressBarPercent = currentTime / duration * 100;
@@ -92,16 +92,60 @@ const progressBarUpdate = (e) => {
   progressBarTime.textContent = convertTime(currentTime);
 }
 
-audioFile.addEventListener("timeupdate", progressBarUpdate);
-
+/* Rewind track */
 const rewindTrack = (e) => {
+  // Width of target element
   const length = e.currentTarget.offsetWidth;
+  // X coordinate of click
   const clickX = e.offsetX;
   const duration = audioFile.duration;
 
   audioFile.currentTime = clickX / length * duration;
 }
 
-progressBar.addEventListener("click", rewindTrack);
+/* Start dragging progress bar handle */
+const startDrag = () => {
+  isDragging = true;
+  progressBar.addEventListener("mousemove", dragTrack);
+  progressBar.addEventListener("mouseup", stopDrag);
+  progressBar.addEventListener("mouseleave", stopDrag);
+};
 
+/* Stop dragging progress bar handle */
+const stopDrag = () => {
+  setTimeout(function () {
+    isDragging = false;
+    progressBar.removeEventListener("mousemove", dragTrack);
+    progressBar.removeEventListener("mouseup", stopDrag);
+    progressBar.removeEventListener("mouseleave", stopDrag);
+  }, 50)
+};
+
+/* Drag progress bar handle */
+const dragTrack = (e) => {
+  if (isDragging) {
+    e.preventDefault();
+    const length = progressBar.offsetWidth;
+    const clickX = e.clientX - progressBar.getBoundingClientRect().left;
+    const duration = audioFile.duration;
+    audioFile.currentTime = clickX / length * duration;
+  }
+};
+
+/* Initialize player with the first song paused */
+let isPlaying = false;
+let currentSong = 0;
+let isDragging = false;
+
+initSong(currentSong);
+
+playPauseBtn.addEventListener("click", playPause);
+nextBtn.addEventListener("click", nextTrack);
+prevBtn.addEventListener("click", prevTrack);
+/* When track ends switch to next one automatically */
 audioFile.addEventListener("ended", nextTrack);
+/* Update progress bar while track is playing */
+audioFile.addEventListener("timeupdate", progressBarUpdate);
+progressBar.addEventListener("click", rewindTrack);
+progressBar.addEventListener("mousedown", startDrag);
+
