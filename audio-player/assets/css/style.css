@@ -125,6 +125,10 @@ main {
   cursor: pointer;
 }
 
+.prev-btn svg, .next-btn svg {
+  fill:#f4efef;
+}
+
 .play-pause-btn {
   display: flex;
   justify-content: center;
