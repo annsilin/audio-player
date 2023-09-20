@@ -13,8 +13,9 @@ const progressBarDuration = document.querySelector('.progress-bar-time__end');
 const progressBarHandle = document.querySelector('.progress-bar__inner-dot');
 const volumeBar = document.querySelector('.volume-bar');
 const volumeBarCurrent = document.querySelector('.volume-bar__inner');
-
-// let volume = 0.5;
+const volumeBtn = document.getElementById('volume-toggle');
+const volumeBtnIcon = volumeBtn.querySelector('svg').querySelector('use');
+const volumeBarContainer = document.querySelector('.volume-wrapper');
 
 const initSong = (i) => {
   coverImg.src = songs[i].cover;
@@ -35,19 +36,17 @@ const initSong = (i) => {
 const play = () => {
   audioFile.play();
   playPauseIcon.setAttribute("href", "assets/svg/icons.svg#pause");
-  isPlaying = true;
 }
 
 /* Pause song */
 const pause = () => {
   audioFile.pause();
   playPauseIcon.setAttribute("href", "assets/svg/icons.svg#play");
-  isPlaying = false;
 }
 
 /* Play or pause song */
 const playPause = () => {
-  if (!isPlaying) {
+  if (audioFile.paused) {
     play();
   } else {
     pause();
@@ -157,7 +156,6 @@ const dragVolume = (e) => {
     const length = volumeBar.offsetWidth;
     const clickX = e.clientX - volumeBar.getBoundingClientRect().left;
     audioFile.volume = clickX / length;
-    console.log(clickX / length);
   }
 };
 
@@ -179,8 +177,7 @@ const stopDragVolume = () => {
   }, 50)
 };
 
-/* Initialize player with the first song paused */
-let isPlaying = false;
+/* Initialize player */
 let currentSong = 0;
 let isDraggingProgress = false;
 let isDraggingVolume = false;
@@ -201,3 +198,13 @@ progressBar.addEventListener("mousedown", startDragProgress);
 audioFile.addEventListener("volumechange", volumeBarUpdate);
 volumeBar.addEventListener("click", setVolume);
 volumeBar.addEventListener("mousedown", startDragVolume);
+
+volumeBtn.addEventListener("click", () => {
+  volumeBarContainer.classList.toggle("volume-visible");
+  if (volumeBarContainer.classList.contains("volume-visible")) {
+    volumeBtnIcon.setAttribute("href", "assets/svg/icons.svg#cross");
+  }
+  else {
+    volumeBtnIcon.setAttribute("href", "assets/svg/icons.svg#volume-up");
+  }
+})
