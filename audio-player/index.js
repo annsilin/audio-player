@@ -108,26 +108,26 @@ const rewindTrack = (e) => {
 }
 
 /* Start dragging progress bar handle */
-const startDrag = () => {
-  isDragging = true;
+const startDragProgress = () => {
+  isDraggingProgress = true;
   progressBar.addEventListener("mousemove", dragTrack);
-  progressBar.addEventListener("mouseup", stopDrag);
-  progressBar.addEventListener("mouseleave", stopDrag);
+  progressBar.addEventListener("mouseup", stopDragProgress);
+  progressBar.addEventListener("mouseleave", stopDragProgress);
 };
 
 /* Stop dragging progress bar handle */
-const stopDrag = () => {
+const stopDragProgress = () => {
   setTimeout(function () {
-    isDragging = false;
+    isDraggingProgress = false;
     progressBar.removeEventListener("mousemove", dragTrack);
-    progressBar.removeEventListener("mouseup", stopDrag);
-    progressBar.removeEventListener("mouseleave", stopDrag);
+    progressBar.removeEventListener("mouseup", stopDragProgress);
+    progressBar.removeEventListener("mouseleave", stopDragProgress);
   }, 50)
 };
 
 /* Drag progress bar handle */
 const dragTrack = (e) => {
-  if (isDragging) {
+  if (isDraggingProgress) {
     e.preventDefault();
     const length = progressBar.offsetWidth;
     const clickX = e.clientX - progressBar.getBoundingClientRect().left;
@@ -150,10 +150,40 @@ const setVolume = (e) => {
   audioFile.volume = clickX / length;
 };
 
+/* Drag volume bar handle */
+const dragVolume = (e) => {
+  if (isDraggingVolume) {
+    e.stopPropagation()
+    const length = volumeBar.offsetWidth;
+    const clickX = e.clientX - volumeBar.getBoundingClientRect().left;
+    audioFile.volume = clickX / length;
+    console.log(clickX / length);
+  }
+};
+
+/* Start dragging volume bar handle */
+const startDragVolume = () => {
+  isDraggingVolume = true;
+  volumeBar.addEventListener("mousemove", dragVolume);
+  volumeBar.addEventListener("mouseup", stopDragVolume);
+  volumeBar.addEventListener("mouseleave", stopDragVolume);
+};
+
+/* Stop dragging volume bar handle */
+const stopDragVolume = () => {
+  setTimeout(function () {
+    isDraggingVolume = false;
+    volumeBar.removeEventListener("mousemove", dragVolume);
+    volumeBar.removeEventListener("mouseup", stopDragVolume);
+    volumeBar.removeEventListener("mouseleave", stopDragVolume);
+  }, 50)
+};
+
 /* Initialize player with the first song paused */
 let isPlaying = false;
 let currentSong = 0;
-let isDragging = false;
+let isDraggingProgress = false;
+let isDraggingVolume = false;
 audioFile.volume = 0.5;
 
 initSong(currentSong);
@@ -167,6 +197,7 @@ audioFile.addEventListener("ended", nextTrack);
 /* Update progress bar while track is playing */
 audioFile.addEventListener("timeupdate", progressBarUpdate);
 progressBar.addEventListener("click", rewindTrack);
-progressBar.addEventListener("mousedown", startDrag);
+progressBar.addEventListener("mousedown", startDragProgress);
 audioFile.addEventListener("volumechange", volumeBarUpdate);
 volumeBar.addEventListener("click", setVolume);
+volumeBar.addEventListener("mousedown", startDragVolume);
