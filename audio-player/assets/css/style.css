@@ -3,10 +3,22 @@
 }
 
 :root {
-  /*--primary-color: #eb6b34;*/
-  /*--secondary-color: #152b2c;*/
   --primary-color: #FFFFFF;
   --secondary-color: #000000;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #161616;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .wrapper {
@@ -127,4 +139,41 @@
 
 .play-pause-btn > svg {
   fill: var(--secondary-color);
+}
+
+
+#footer {
+  height: 50px;
+  /*width: 375px;*/
+  background: #060606;
+  border-radius: 30px 30px 0 0;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+#footer ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  list-style: none;
+  font-family: sans-serif;
+}
+
+#footer ul > li svg {
+  height: 30px;
+  fill: #f4efef;
+  transition: fill 0.3s ease;
+}
+
+#footer ul > li svg:hover {
+  fill: var(--primary-color);
+}
+
+#footer ul > li p {
+  margin: 0;
+  color: #f4efef;
+  font-weight: 700;
 }

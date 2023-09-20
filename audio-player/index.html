@@ -11,47 +11,71 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="wrapper">
-  <img class="album-cover" src="" alt="">
+<main>
+  <div class="wrapper">
+    <img class="album-cover" src="" alt="">
 
-  <div class="song-name">
-    <span class="artist">Artist</span>
-    <div class="title">Title</div>
-  </div>
-
-  <audio src="" class="audio"></audio>
-
-  <div class="progress-wrapper">
-    <div class="progress-bar">
-      <div class="progress-bar__inner"></div>
-      <div class="progress-bar__inner-dot"></div>
+    <div class="song-name">
+      <span class="artist">Artist</span>
+      <div class="title">Title</div>
     </div>
-    <div class="progress-bar-time-container">
-      <span class="progress-bar-time progress-bar-time__current">0:00</span>
-      <span class="progress-bar-time progress-bar-time__end">0:00</span>
+
+    <audio src="" class="audio"></audio>
+
+    <div class="progress-wrapper">
+      <div class="progress-bar">
+        <div class="progress-bar__inner"></div>
+        <div class="progress-bar__inner-dot"></div>
+      </div>
+      <div class="progress-bar-time-container">
+        <span class="progress-bar-time progress-bar-time__current">0:00</span>
+        <span class="progress-bar-time progress-bar-time__end">0:00</span>
+      </div>
+    </div>
+    <div class="buttons">
+      <button class="prev-btn btn">
+        <svg width="26px" height="26px">
+          <use href="assets/svg/icons.svg#prev"></use>
+        </svg>
+      </button>
+
+      <button class="play-pause-btn">
+        <svg width="26px" height="26px">
+          <use href="assets/svg/icons.svg#play"></use>
+        </svg>
+      </button>
+
+      <button class="next-btn btn">
+        <svg width="26px" height="26px">
+          <use href="assets/svg/icons.svg#next"></use>
+        </svg>
+      </button>
     </div>
   </div>
-  <div class="buttons">
-    <button class="prev-btn btn">
-      <svg width="26px" height="26px">
-        <use href="assets/svg/icons.svg#prev"></use>
-      </svg>
-    </button>
+</main>
 
-    <button class="play-pause-btn">
-      <svg width="26px" height="26px">
-        <use href="assets/svg/icons.svg#play"></use>
-      </svg>
-    </button>
+<footer class="main-footer">
+  <nav id="footer">
+    <ul>
+      <li>
+        <a href="https://github.com/annsilin" target="_blank">
+          <svg width="90px" height="26px">
+            <use href="assets/svg/icons.svg#github"></use>
+          </svg>
+        </a>
+      </li>
+      <li><p>2023</p></li>
+      <li>
+        <a href="https://rs.school/js-stage0/" target="_blank">
+          <svg width="90px" height="26px">
+            <use href="assets/svg/icons.svg#rsschool"></use>
+          </svg>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</footer>
 
-    <button class="next-btn btn">
-      <svg width="26px" height="26px">
-        <use href="assets/svg/icons.svg#next"></use>
-      </svg>
-    </button>
-  </div>
-
-</div>
 <script defer src="assets/js/songs.js"></script>
 <script defer src="index.js"></script>
 </body>
