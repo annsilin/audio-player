@@ -89,7 +89,7 @@ main {
   border-radius: 30px 0 0 30px;
 }
 
-.progress-bar__inner-dot {
+.progress-bar__inner-dot, .volume-bar__inner-dot {
   box-sizing: unset;
   height: 11px;
   width: 11px;
@@ -111,6 +111,75 @@ main {
   line-height: normal;
 }
 
+/*.volume-wrapper {*/
+/*  width: fit-content;*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  align-items: center;*/
+/*  padding-top: 5px;*/
+/*  padding-bottom: 5px;*/
+/*  background: linear-gradient(var(--primary-color), var(--secondary-color));*/
+/*  border-radius: 30px 30px 30px 30px;*/
+/*}*/
+
+/*.volume-bar {*/
+/*  height: 150px;*/
+/*  width: 11px;*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*  justify-content: flex-end;*/
+/*  align-items: center;*/
+/*  background-color: #74717C;*/
+/*  border-radius: 30px;*/
+/*}*/
+
+/*.volume-bar__inner {*/
+/*  height: 0;*/
+/*  width: 11px;*/
+/*  background-color: var(--primary-color);*/
+/*  border-radius: 30px 30px 30px 30px;*/
+/*}*/
+
+/*.volume-bar__inner-dot {*/
+/*  box-sizing: unset;*/
+/*  height: 11px;*/
+/*  width: 11px;*/
+/*  border-radius: 50%;*/
+/*  background-color: var(--primary-color);*/
+/*  outline: 3px solid var(--secondary-color);*/
+/*  cursor: pointer;*/
+/*}*/
+
+.volume-wrapper {
+  width: fit-content;
+  display: flex;
+  /*flex-direction: column;*/
+  align-items: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: linear-gradient(var(--primary-color), var(--secondary-color));
+  border-radius: 30px 30px 30px 30px;
+}
+
+.volume-bar {
+  height: 11px;
+  width: 150px;
+  display: flex;
+  /*flex-direction: row;*/
+  /*justify-content: flex-end;*/
+  align-items: center;
+  background-color: #74717C;
+  border-radius: 30px;
+}
+
+.volume-bar__inner {
+  height: 11px;
+  width: 0;
+  background-color: var(--primary-color);
+  border-radius: 30px 0 0 30px;
+}
+
+
 .buttons {
   display: flex;
   align-items: center;
@@ -120,12 +189,15 @@ main {
 .btn {
   margin: 0;
   padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: none;
   border: none;
   cursor: pointer;
 }
 
-.prev-btn svg, .next-btn svg {
+.prev-btn svg, .next-btn svg, .volume-up-btn svg, .volume-down-btn svg{
   fill:#f4efef;
 }
 

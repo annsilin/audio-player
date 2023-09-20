@@ -11,6 +11,10 @@ const progressBarCurrent = document.querySelector('.progress-bar__inner');
 const progressBarTime = document.querySelector('.progress-bar-time__current');
 const progressBarDuration = document.querySelector('.progress-bar-time__end');
 const progressBarHandle = document.querySelector('.progress-bar__inner-dot');
+const volumeBar = document.querySelector('.volume-bar');
+const volumeBarCurrent = document.querySelector('.volume-bar__inner');
+
+// let volume = 0.5;
 
 const initSong = (i) => {
   coverImg.src = songs[i].cover;
@@ -132,12 +136,28 @@ const dragTrack = (e) => {
   }
 };
 
+/* Update volume bar width upon current audio volume */
+const volumeBarUpdate = () => {
+  const volume = audioFile.volume;
+  const volumeBarPercent = volume * 100;
+  volumeBarCurrent.style.width = `${volumeBarPercent}%`;
+};
+
+/* Set volume when user clicks on volume bar */
+const setVolume = (e) => {
+  const length = volumeBar.offsetWidth;
+  const clickX = e.offsetX;
+  audioFile.volume = clickX / length;
+};
+
 /* Initialize player with the first song paused */
 let isPlaying = false;
 let currentSong = 0;
 let isDragging = false;
+audioFile.volume = 0.5;
 
 initSong(currentSong);
+volumeBarUpdate();
 
 playPauseBtn.addEventListener("click", playPause);
 nextBtn.addEventListener("click", nextTrack);
@@ -148,4 +168,5 @@ audioFile.addEventListener("ended", nextTrack);
 audioFile.addEventListener("timeupdate", progressBarUpdate);
 progressBar.addEventListener("click", rewindTrack);
 progressBar.addEventListener("mousedown", startDrag);
-
+audioFile.addEventListener("volumechange", volumeBarUpdate);
+volumeBar.addEventListener("click", setVolume);
