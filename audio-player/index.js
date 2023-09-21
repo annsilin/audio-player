@@ -114,6 +114,8 @@ const startDragProgress = () => {
   progressBar.addEventListener("mousemove", dragTrack);
   progressBar.addEventListener("mouseup", stopDragProgress);
   progressBar.addEventListener("mouseleave", stopDragProgress);
+  progressBar.addEventListener("touchmove", dragTrack);
+  progressBar.addEventListener("touchend", stopDragProgress);
 };
 
 /* Stop dragging progress bar handle */
@@ -123,6 +125,8 @@ const stopDragProgress = () => {
     progressBar.removeEventListener("mousemove", dragTrack);
     progressBar.removeEventListener("mouseup", stopDragProgress);
     progressBar.removeEventListener("mouseleave", stopDragProgress);
+    progressBar.removeEventListener("touchmove", dragTrack);
+    progressBar.removeEventListener("touchend", stopDragProgress);
   }, 50)
 };
 
@@ -130,10 +134,31 @@ const stopDragProgress = () => {
 const dragTrack = (e) => {
   if (isDraggingProgress) {
     e.preventDefault();
+    let clientX;
+
+    if (e.type === "touchmove") {
+      // For touch events, get the X-coordinate from the touch object
+      clientX = e.touches[0].clientX;
+    } else {
+      // For mouse events, use the clientX directly
+      clientX = e.clientX;
+    }
+
     const length = progressBar.offsetWidth;
-    const clickX = e.clientX - progressBar.getBoundingClientRect().left;
+    let clickX = clientX - progressBar.getBoundingClientRect().left;
+
+    if (clickX < 0) {
+      clickX = 0;
+    } else if (clickX >= length) {
+      clickX = length;
+      isDraggingProgress = false;
+    }
+
     const duration = audioFile.duration;
-    audioFile.currentTime = clickX / length * duration;
+
+    if (!isNaN(duration)) {
+      audioFile.currentTime = clickX / length * duration;
+    }
   }
 };
 
@@ -155,8 +180,24 @@ const setVolume = (e) => {
 const dragVolume = (e) => {
   if (isDraggingVolume) {
     e.stopPropagation()
+    let clientX;
+
+    if (e.type === "touchmove") {
+      // For touch events, get the X-coordinate from the touch object
+      clientX = e.touches[0].clientX;
+    } else {
+      // For mouse events, use the clientX directly
+      clientX = e.clientX;
+    }
     const length = volumeBar.offsetWidth;
-    const clickX = e.clientX - volumeBar.getBoundingClientRect().left;
+    let clickX = clientX - volumeBar.getBoundingClientRect().left;
+
+    if (clickX < 0) {
+      clickX = 0;
+    } else if (clickX > length) {
+      clickX = length;
+    }
+
     audioFile.volume = clickX / length;
   }
 };
@@ -167,6 +208,8 @@ const startDragVolume = () => {
   volumeBar.addEventListener("mousemove", dragVolume);
   volumeBar.addEventListener("mouseup", stopDragVolume);
   volumeBar.addEventListener("mouseleave", stopDragVolume);
+  volumeBar.addEventListener("touchmove", dragVolume);
+  volumeBar.addEventListener("touchend", stopDragVolume);
 };
 
 /* Stop dragging volume bar handle */
@@ -176,6 +219,8 @@ const stopDragVolume = () => {
     volumeBar.removeEventListener("mousemove", dragVolume);
     volumeBar.removeEventListener("mouseup", stopDragVolume);
     volumeBar.removeEventListener("mouseleave", stopDragVolume);
+    volumeBar.removeEventListener("touchmove", dragVolume);
+    volumeBar.removeEventListener("touchend", stopDragVolume);
   }, 50)
 };
 
@@ -197,9 +242,11 @@ audioFile.addEventListener("ended", nextTrack);
 audioFile.addEventListener("timeupdate", progressBarUpdate);
 progressBar.addEventListener("click", rewindTrack);
 progressBar.addEventListener("mousedown", startDragProgress);
+progressBar.addEventListener("touchstart", startDragProgress);
 audioFile.addEventListener("volumechange", volumeBarUpdate);
 volumeBar.addEventListener("click", setVolume);
 volumeBar.addEventListener("mousedown", startDragVolume);
+volumeBar.addEventListener("touchstart", startDragVolume);
 
 volumeBtn.addEventListener("click", () => {
   volumeBarContainer.classList.toggle("volume-visible");
