@@ -16,6 +16,8 @@ const volumeBarCurrent = document.querySelector('.volume-bar__inner');
 const volumeBtn = document.getElementById('volume-toggle');
 const volumeBtnIcon = volumeBtn.querySelector('svg').querySelector('use');
 const volumeBarContainer = document.querySelector('.volume-wrapper');
+const volumeUpBtn = document.getElementById('volume-up-btn');
+const volumeDownBtn = document.getElementById('volume-down-btn');
 
 const initSong = (i) => {
   coverImg.src = songs[i].cover;
@@ -203,8 +205,36 @@ volumeBtn.addEventListener("click", () => {
   volumeBarContainer.classList.toggle("volume-visible");
   if (volumeBarContainer.classList.contains("volume-visible")) {
     volumeBtnIcon.setAttribute("href", "assets/svg/icons.svg#cross");
-  }
-  else {
+  } else {
     volumeBtnIcon.setAttribute("href", "assets/svg/icons.svg#volume-up");
   }
-})
+});
+
+volumeUpBtn.addEventListener("click", () => {
+  if (audioFile.volume < 1) {
+    let volume = audioFile.volume + 0.1;
+    if (volume >= 1) {
+      audioFile.volume = 1;
+    } else {
+      audioFile.volume = volume;
+    }
+  }
+});
+
+volumeDownBtn.addEventListener("click", () => {
+  if (audioFile.volume > 0) {
+    let volume = audioFile.volume - 0.1;
+    if (volume <= 0) {
+      audioFile.volume = 0;
+    } else {
+      audioFile.volume = volume;
+    }
+  }
+});
+
+document.addEventListener("click", (e) => {
+  if (!volumeBarContainer.contains(e.target) && !volumeBtn.contains(e.target)) {
+    volumeBarContainer.classList.remove("volume-visible");
+    volumeBtnIcon.setAttribute("href", "assets/svg/icons.svg#volume-up");
+  }
+});
