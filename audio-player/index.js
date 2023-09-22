@@ -28,6 +28,9 @@ const initSong = (i) => {
   audioFile.addEventListener('loadedmetadata', () => {
     progressBarDuration.textContent = convertTime(audioFile.duration);
   });
+  // Reset progress bar visuals
+  progressBar.value = 0;
+  progressBar.style.background = `linear-gradient(to right, var(--primary-color) ${progressBar.value}%, #74717C ${progressBar.value}%)`;
 }
 
 /* Play song */
