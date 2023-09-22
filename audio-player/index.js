@@ -94,6 +94,7 @@ const progressBarUpdate = (e) => {
   const {duration, currentTime} = e.target;
   // If duration is not NaN and user isn't dragging a progress bar
   if (duration && !isDraggingProgress) {
+    progressBar.step = 100 / duration;
     progressBarTime.textContent = convertTime(currentTime);
     progressBar.value = (100 * currentTime) / duration;
     progressBar.style.background = `linear-gradient(to right, var(--primary-color) ${progressBar.value}%, #74717C ${progressBar.value}%)`;
