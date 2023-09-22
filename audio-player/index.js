@@ -164,6 +164,7 @@ volumeUpBtn.addEventListener("click", () => {
   if (audioFile.volume < 1) {
     let volume = audioFile.volume + 0.1;
     volumeBar.value = volume * 100;
+    volumeBar.style.background = `linear-gradient(to right, var(--primary-color) ${volumeBar.value}%, #74717C ${volumeBar.value}%)`;
     if (volume >= 1) {
       audioFile.volume = 1;
     } else {
@@ -176,6 +177,7 @@ volumeDownBtn.addEventListener("click", () => {
   if (audioFile.volume > 0) {
     let volume = audioFile.volume - 0.1;
     volumeBar.value = volume * 100;
+    volumeBar.style.background = `linear-gradient(to right, var(--primary-color) ${volumeBar.value}%, #74717C ${volumeBar.value}%)`;
     if (volume <= 0) {
       audioFile.volume = 0;
     } else {
