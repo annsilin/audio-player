@@ -186,12 +186,36 @@ main {
   background-color: var(--primary-color);
   border: none;
   cursor: pointer;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+@keyframes glowing-border {
+  0% {
+    box-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 30px var(--primary-color);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--primary-color), 0 0 30px var(--primary-color), 0 0 40px var(--primary-color);
+  }
+  100% {
+    box-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 30px var(--primary-color);
+  }
+}
+
+@media (hover: hover) {
+  .play-pause-btn:hover {
+    animation: glowing-border 1s infinite;
+  }
+}
+
+@media (hover: none) {
+  .play-pause-btn:hover {
+    animation: none;
+  }
 }
 
 .play-pause-btn > svg {
   fill: var(--secondary-color);
 }
-
 
 #footer {
   height: 50px;
