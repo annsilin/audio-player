@@ -14,7 +14,7 @@
 <body>
 <main>
   <div class="wrapper">
-    <img class="album-cover" src="" alt="">
+    <img class="album-cover" src="assets/img/shampoo-cover.webp" alt="Shampoo album cover">
 
     <div class="wrapper-name-volume">
       <div class="song-name">
@@ -35,10 +35,8 @@
           </svg>
         </button>
 
-        <div class="volume-bar">
-          <div class="volume-bar__inner"></div>
-          <div class="volume-bar__inner-dot"></div>
-        </div>
+        <label for="volume-bar" style="display: none">Volume bar</label>
+        <input type="range" name="volume-bar" id="volume-bar" class="volume-bar" min="0" max="100" value="50">
 
         <button class="volume-up-btn btn" id="volume-up-btn">
           <svg width="20px" height="14.31px">
@@ -49,13 +47,13 @@
 
     </div>
 
-    <audio src="" class="audio"></audio>
+    <audio src="assets/audio/MAMAMOO%20-%20Shampoo.opus" class="audio"></audio>
 
     <div class="progress-wrapper">
-      <div class="progress-bar">
-        <div class="progress-bar__inner"></div>
-        <div class="progress-bar__inner-dot"></div>
-      </div>
+
+      <label for="progress-bar" style="display: none">Progress bar</label>
+      <input type="range" name="progress-bar" id="progress-bar" class="progress-bar" min="0" max="100" value="0">
+
       <div class="progress-bar-time-container">
         <span class="progress-bar-time progress-bar-time__current">0:00</span>
         <span class="progress-bar-time progress-bar-time__end">0:00</span>
