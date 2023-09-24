@@ -173,7 +173,8 @@ main {
 }
 
 .prev-btn svg, .next-btn svg, .volume-up-btn svg, .volume-down-btn svg{
-  fill:#f4efef;
+  fill: #f4efef;
+  transition: fill 0.3s ease-in-out;
 }
 
 .play-pause-btn {
@@ -205,12 +206,22 @@ main {
   .play-pause-btn:hover {
     animation: glowing-border 1s infinite;
   }
+
+  .prev-btn svg:hover, .next-btn svg:hover, .volume-up-btn svg:hover, .volume-down-btn svg:hover {
+    fill: var(--primary-color);
+  }
+
 }
 
 @media (hover: none) {
   .play-pause-btn:hover {
     animation: none;
   }
+
+  .prev-btn svg:hover, .next-btn svg:hover, #volume-toggle:hover, .volume-up-btn svg:hover, .volume-down-btn svg:hover {
+    fill: #f4efef
+  }
+
 }
 
 .play-pause-btn > svg {
